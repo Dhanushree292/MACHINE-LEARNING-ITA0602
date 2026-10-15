@@ -1,0 +1,31 @@
+import pandas as pd
+
+data = {
+    'Sky': ['Sunny', 'Sunny', 'Rainy', 'Sunny'],
+    'AirTemp': ['Warm', 'Warm', 'Cold', 'Warm'],
+    'Humidity': ['Normal', 'High', 'High', 'High'],
+    'Wind': ['Strong', 'Strong', 'Strong', 'Strong'],
+    'Water': ['Warm', 'Warm', 'Warm', 'Warm'],
+    'Forecast': ['Same', 'Same', 'Change', 'Same'],
+    'EnjoySport': ['Yes', 'Yes', 'No', 'Yes']
+}
+
+df = pd.DataFrame(data)
+
+print("Training Data:")
+print(df)
+
+attributes = df.columns[:-1]
+hypothesis = None
+
+for _, row in df.iterrows():
+    if row['EnjoySport'] == 'Yes':
+        if hypothesis is None:
+            hypothesis = list(row[attributes])
+        else:
+            for i in range(len(hypothesis)):
+                if hypothesis[i] != row[attributes[i]]:
+                    hypothesis[i] = '?'
+
+print("\nFinal Most Specific Hypothesis:")
+print(hypothesis)
